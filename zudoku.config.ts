@@ -78,7 +78,7 @@ const config: ZudokuConfig = {
       ],
     },
   ],
-  redirects: [{ from: "/", to: "/documentation/introduction" }],
+  redirects: [{ from: "/", to: basePath ? `${basePath}/documentation/introduction` : "/documentation/introduction" }],
   apis: [
     {
       type: "file",
