@@ -2,6 +2,7 @@ import type { ZudokuConfig } from "zudoku";
 
 // For GitHub Pages: set BASE_PATH to repo name (e.g. /Cepi-Docs) when deploying
 const basePath = process.env.BASE_PATH || "";
+const p = (path: string) => (basePath ? `${basePath}${path}` : path);
 
 const config: ZudokuConfig = {
   ...(basePath && { basePath }),
@@ -18,18 +19,18 @@ const config: ZudokuConfig = {
         {
           title: "Documentation",
           links: [
-            { label: "Introduction", href: "/documentation/introduction" },
-            { label: "Authentication", href: "/documentation/authentication" },
-            { label: "Logins", href: "/documentation/logins" },
-            { label: "API Reference", href: "/api/cepi" },
+            { label: "Introduction", href: p("/documentation/introduction") },
+            { label: "Authentication", href: p("/documentation/authentication") },
+            { label: "Logins", href: p("/documentation/logins") },
+            { label: "API Reference", href: p("/api/cepi") },
           ],
         },
         {
           title: "Project",
           links: [
-            { label: "Overview", href: "/project/overview" },
-            { label: "Components", href: "/project/services" },
-            { label: "Logins", href: "/documentation/logins" },
+            { label: "Overview", href: p("/project/overview") },
+            { label: "Components", href: p("/project/services") },
+            { label: "Logins", href: p("/documentation/logins") },
           ],
         },
         {
@@ -62,7 +63,7 @@ const config: ZudokuConfig = {
     },
     {
       type: "link",
-      to: "/api/cepi",
+      to: p("/api/cepi"),
       label: "API Reference",
     },
     {
