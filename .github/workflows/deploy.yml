@@ -39,7 +39,8 @@ jobs:
       - name: Upload artifact
         uses: actions/upload-pages-artifact@v3
         with:
-          path: ./dist
+          # Build outputs to dist/<repo-name>/ when BASE_PATH is set; upload that folder so index.html is at root
+          path: ./dist/${{ github.event.repository.name }}
 
   deploy:
     environment:
