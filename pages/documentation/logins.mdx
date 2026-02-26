@@ -1,0 +1,64 @@
+---
+title: Logins
+description: Login URLs and user roles (no passwords)
+---
+
+## Overview
+
+The CEPI Member Management application has two separate login areas, each with different access levels.
+
+---
+
+## Organisation Login
+
+**URL:** `https://mmcepi.optimasit.com/login`
+
+**Who uses it:** Organisation users (members of a CEPI or non-CEPI organisation).
+
+**Access after login:**
+- Import members (Excel/CSV)
+- Export members (CSV/Excel)
+- View organisation data
+
+**Credentials:** Organisation accounts are created by an admin. Contact your administrator if you need access.
+
+---
+
+## Admin Login
+
+**URL:** `https://mmcepi.optimasit.com/admin/login`
+
+**Who uses it:** Administrators only.
+
+**Access after login:**
+- Dashboard
+- Manage organisations
+- Create and manage API keys
+- Create admin accounts
+- Manage organisation accounts
+
+**Credentials:** Admin accounts are created by another admin. Contact an existing administrator if you need admin access.
+
+---
+
+## API Keys (for integrations)
+
+API keys are **not** used for web login. They are for server-to-server API calls (e.g. the check-member endpoint).
+
+- Create API keys: Admin Dashboard → **API Keys**
+- See [Authentication](/documentation/authentication) for how to use them in requests
+
+---
+
+## Summary
+
+| Login type | URL | Purpose |
+|------------|-----|---------|
+| Organisation | `/login` | Import/export members |
+| Admin | `/admin/login` | Full system management |
+
+**Credentials:** Never share passwords. For access requests, contact your administrator.
+
+---
+
+**Powered by Zudoku**

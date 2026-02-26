@@ -20,6 +20,7 @@ const config: ZudokuConfig = {
           links: [
             { label: "Introduction", href: "/documentation/introduction" },
             { label: "Authentication", href: "/documentation/authentication" },
+            { label: "Logins", href: "/documentation/logins" },
             { label: "API Reference", href: "/api/cepi" },
           ],
         },
@@ -28,6 +29,7 @@ const config: ZudokuConfig = {
           links: [
             { label: "Overview", href: "/project/overview" },
             { label: "Components", href: "/project/services" },
+            { label: "Logins", href: "/documentation/logins" },
           ],
         },
         {
@@ -49,7 +51,7 @@ const config: ZudokuConfig = {
         {
           type: "category",
           label: "Getting started",
-          items: ["documentation/introduction", "documentation/authentication"],
+          items: ["documentation/introduction", "documentation/authentication", "documentation/logins"],
         },
         {
           type: "category",
@@ -71,7 +73,7 @@ const config: ZudokuConfig = {
         {
           type: "category",
           label: "Project Information",
-          items: ["project/overview", "project/services", "project/database"],
+          items: ["project/overview", "project/services", "project/database", "documentation/logins"],
         },
       ],
     },
