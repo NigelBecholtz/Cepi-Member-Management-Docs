@@ -1,0 +1,48 @@
+---
+title: Project Overview
+description: Overview of the CEPI Member Management API project
+---
+
+## Introduction
+
+The CEPI Member Management project is a Laravel application for managing CEPI members and organisations. This document helps developers quickly understand how the project works.
+
+## Architecture
+
+```
+┌──────────────────────────────┐
+│      cepi-laravel            │
+│   (Laravel 12, PHP 8.2)      │
+│   • API check-member         │
+│   • Admin dashboard          │
+│   • Import/Export            │
+└──────────────┬───────────────┘
+               │
+    ┌──────────▼──────────┐
+    │   MySQL Database    │
+    │   (cepi)            │
+    └─────────────────────┘
+```
+
+## Project Structure
+
+| Path | Technology | Purpose |
+|------|------------|---------|
+| `cepi-laravel/` | Laravel 12, PHP 8.2 | API, check-member endpoint, admin dashboard, import/export |
+
+## Base URLs
+
+| Environment | API / App |
+|-------------|-----------|
+| Production | `https://mmcepi.optimasit.com` |
+| API Base | `https://mmcepi.optimasit.com/api` |
+| Admin | `https://mmcepi.optimasit.com/admin` |
+
+## Next Steps
+
+- [Components](/project/services)
+- [Database & Configuration](/project/database)
+
+---
+
+**Powered by Zudoku**

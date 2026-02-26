@@ -1,0 +1,17 @@
+---
+title: Rate Limits
+description: API rate limits and throttling
+---
+
+## Limits
+
+| Limit | Value |
+|-------|-------|
+| Per minute | 60 requests |
+| Per hour | 1000 requests |
+
+When exceeded, the API key is temporarily blocked. The `retry_after` field in the 429 response indicates the number of seconds until you can retry.
+
+---
+
+**Powered by Zudoku**

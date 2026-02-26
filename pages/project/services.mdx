@@ -1,0 +1,27 @@
+---
+title: Components
+description: Components of the cepi-laravel project
+---
+
+## cepi-laravel
+
+**Purpose:** API and admin interface for member management.
+
+| Component | Technology | Use |
+|-----------|-------------|-----|
+| **API** | Laravel 12, REST | `GET /api/check-member` — checks if an email is a CEPI member |
+| **Database** | MySQL | `organisations`, `members`, `api_keys`, `activity_logs` |
+| **Auth** | Session + API keys | Organisations log in; API keys for external integration |
+| **Import/Export** | PHPOffice PhpSpreadsheet | Excel/CSV import of members, export to CSV/Excel |
+| **Cache** | Database / Redis | Rate limiting, sessions |
+| **Queue** | Database | Optional for async jobs |
+
+**Key files:**
+- `routes/api.php` — API routes
+- `app/Http/Controllers/Api/CheckMemberController.php` — check-member logic
+- `app/Models/` — Member, Organisation, ApiKey, etc.
+- `.env` — `DB_*`, `EMAIL_ENCRYPTION_KEY` (required in production)
+
+---
+
+**Powered by Zudoku**

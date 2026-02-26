@@ -1,0 +1,80 @@
+---
+title: Check Member
+description: Verify if an email is registered as an active CEPI member
+---
+
+## Overview
+
+Check whether an email address is registered as an active member.
+
+**URL:** `GET /api/check-member`
+
+## Request
+
+| Parameter | Type | Required | Description |
+|-----------|------|----------|-------------|
+| `email` | string | Yes | Email address to check |
+
+### Example
+
+```
+GET /api/check-member?email=user@example.com&api_key=YOUR_API_KEY
+```
+
+## Response (member found)
+
+**Status:** `200 OK`
+
+```json
+{
+  "found": true,
+  "mm_cepi": true,
+  "organisation_id": 5,
+  "organisation_name": "Example Organisation",
+  "organisation_is_cepi_member": true,
+  "organisation_total_members": 150,
+  "organisation_active_members": 142,
+  "organisation_active_percentage": 94.7
+}
+```
+
+| Field | Type | Description |
+|-------|------|-------------|
+| `found` | boolean | Whether the member was found |
+| `mm_cepi` | boolean | MM-CEPI member (CEPI organisations only) |
+| `organisation_id` | integer | Organisation ID |
+| `organisation_name` | string | Organisation name |
+| `organisation_is_cepi_member` | boolean | Whether the organisation is a CEPI member |
+| `organisation_total_members` | integer | Total number of members |
+| `organisation_active_members` | integer | Number of active members |
+| `organisation_active_percentage` | number | Percentage of active members |
+
+## Response (member not found)
+
+**Status:** `200 OK`
+
+```json
+{
+  "found": false,
+  "mm_cepi": false,
+  "organisation_id": null,
+  "organisation_name": null,
+  "organisation_is_cepi_member": null,
+  "organisation_total_members": null,
+  "organisation_active_members": null,
+  "organisation_active_percentage": null
+}
+```
+
+## CEPI vs non-CEPI
+
+| Organisation | `found` | `mm_cepi` | Meaning |
+|--------------|---------|-----------|---------|
+| CEPI | `true` | `false` | Member of CEPI organisation |
+| CEPI | `true` | `true` | MM-CEPI member |
+| Non-CEPI | `true` | `false` | Member of non-CEPI organisation |
+| - | `false` | `false` | No member found |
+
+---
+
+**Powered by Zudoku**

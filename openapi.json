@@ -1,0 +1,106 @@
+{
+  "openapi": "3.1.0",
+  "info": {
+    "title": "CEPI Member Management API",
+    "version": "1.0.0",
+    "description": "API for checking whether an email address is registered as a member of a CEPI organisation."
+  },
+  "servers": [
+    {
+      "url": "https://mmcepi.optimasit.com/api"
+    }
+  ],
+  "paths": {
+    "/check-member": {
+      "get": {
+        "summary": "Check Member (GET)",
+        "description": "Check whether an email address is registered as an active member.",
+        "operationId": "checkMemberGet",
+        "parameters": [
+          {
+            "name": "email",
+            "in": "query",
+            "required": true,
+            "schema": { "type": "string", "format": "email" },
+            "description": "Email address to check"
+          },
+          {
+            "name": "api_key",
+            "in": "query",
+            "required": true,
+            "schema": { "type": "string" },
+            "description": "API key for authentication"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "content": {
+              "application/json": {
+                "schema": { "$ref": "#/components/schemas/CheckMemberResponse" }
+              }
+            }
+          },
+          "400": { "$ref": "#/components/responses/BadRequest" },
+          "401": { "$ref": "#/components/responses/Unauthorized" },
+          "429": { "$ref": "#/components/responses/RateLimitExceeded" }
+        },
+        "security": [{ "api_key": [] }]
+      }
+    }
+  },
+  "components": {
+    "securitySchemes": {
+      "api_key": {
+        "type": "apiKey",
+        "in": "header",
+        "name": "X-API-Key",
+        "description": "API key. Can also be provided via Authorization: Bearer or query param api_key."
+      }
+    },
+    "schemas": {
+      "CheckMemberResponse": {
+        "type": "object",
+        "properties": {
+          "found": { "type": "boolean" },
+          "mm_cepi": { "type": "boolean" },
+          "organisation_id": { "type": ["integer", "null"] },
+          "organisation_name": { "type": ["string", "null"] },
+          "organisation_is_cepi_member": { "type": ["boolean", "null"] },
+          "organisation_total_members": { "type": ["integer", "null"] },
+          "organisation_active_members": { "type": ["integer", "null"] },
+          "organisation_active_percentage": { "type": ["number", "null"] },
+          "error": { "type": "string" },
+          "message": { "type": "string" },
+          "retry_after": { "type": "integer" }
+        }
+      }
+    },
+    "responses": {
+      "BadRequest": {
+        "description": "Invalid email address",
+        "content": {
+          "application/json": {
+            "schema": { "$ref": "#/components/schemas/CheckMemberResponse" }
+          }
+        }
+      },
+      "Unauthorized": {
+        "description": "Missing or invalid API key",
+        "content": {
+          "application/json": {
+            "schema": { "$ref": "#/components/schemas/CheckMemberResponse" }
+          }
+        }
+      },
+      "RateLimitExceeded": {
+        "description": "Too many requests",
+        "content": {
+          "application/json": {
+            "schema": { "$ref": "#/components/schemas/CheckMemberResponse" }
+          }
+        }
+      }
+    }
+  }
+}

@@ -1,0 +1,45 @@
+---
+title: Database & Configuration
+description: Database schema and environment variables
+---
+
+## Database
+
+**Engine:** MySQL  
+**Database:** `cepi` (via `DB_DATABASE` in `.env`)
+
+### Key Tables
+
+| Table | Purpose |
+|-------|---------|
+| `organisations` | Organisations (CEPI/non-CEPI, name, etc.) |
+| `members` | Members with `email_lookup_hash`, `mm_cepi`, `is_active` |
+| `api_keys` | API keys for external integration |
+| `activity_logs` | Audit log of API calls and actions |
+| `admins` | Admin accounts for the dashboard |
+
+### Email Storage
+
+- Emails are stored **hashed** (`email_lookup_hash`) for lookup
+- Optionally encrypted (`email_address`) with AES-256-GCM
+- `EMAIL_ENCRYPTION_KEY` in `.env` — **required in production**, 64 hex chars
+
+---
+
+## Environment Variables
+
+### .env
+
+| Variable | Required | Description |
+|---------|----------|-------------|
+| `DB_CONNECTION` | Yes | `mysql` |
+| `DB_HOST`, `DB_PORT`, `DB_DATABASE`, `DB_USERNAME`, `DB_PASSWORD` | Yes | MySQL connection |
+| `EMAIL_ENCRYPTION_KEY` | Production | 64 hex chars, for email encryption |
+| `APP_KEY` | Yes | Laravel encryption key |
+| `SESSION_DRIVER` | - | `file` or `database` |
+| `CACHE_STORE` | - | `database` or `redis` |
+| `QUEUE_CONNECTION` | - | `database` or `redis` |
+
+---
+
+**Powered by Zudoku**

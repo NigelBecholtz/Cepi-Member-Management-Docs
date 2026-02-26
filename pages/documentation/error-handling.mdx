@@ -1,0 +1,58 @@
+---
+title: Error Handling
+description: API error codes and responses
+---
+
+## 400 Bad Request – Invalid email address
+
+```json
+{
+  "error": "Invalid email address",
+  "mm_cepi": false,
+  "organisation_id": null,
+  "organisation_name": null,
+  "organisation_is_cepi_member": null,
+  "organisation_total_members": null,
+  "organisation_active_members": null,
+  "organisation_active_percentage": null
+}
+```
+
+## 401 Unauthorized – Missing or invalid API key
+
+```json
+{
+  "error": "API key required",
+  "message": "Please provide a valid API key. See documentation for authentication methods.",
+  "mm_cepi": false,
+  "organisation_id": null,
+  "organisation_name": null,
+  "organisation_is_cepi_member": null,
+  "organisation_total_members": null,
+  "organisation_active_members": null,
+  "organisation_active_percentage": null
+}
+```
+
+## 429 Too Many Requests – Rate limit exceeded
+
+```json
+{
+  "error": "Rate limit exceeded",
+  "message": "Too many requests. Please try again later.",
+  "retry_after": 45,
+  "mm_cepi": false,
+  "organisation_id": null,
+  "organisation_name": null,
+  "organisation_is_cepi_member": null,
+  "organisation_total_members": null,
+  "organisation_active_members": null,
+  "organisation_active_percentage": null
+}
+```
+
+The `retry_after` field indicates the number of seconds until you can retry.
+
+---
+
+**Powered by Zudoku**
