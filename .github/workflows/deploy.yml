@@ -39,9 +39,21 @@ jobs:
       - name: Prepare artifact for GitHub Pages
         run: |
           ARTIFACT_DIR="./dist/${{ github.event.repository.name }}"
-          # Copy 404.html so GitHub Pages serves it for unknown paths
+
+          # Convert route.html files to route/index.html so GitHub Pages
+          # serves them at clean URLs (e.g. /documentation/introduction).
+          # Skip the root index.html, 404.html, and error pages.
+          find "$ARTIFACT_DIR" -name '*.html' -not -name 'index.html' \
+            -not -name '404.html' -not -name '400.html' -not -name '500.html' | while read f; do
+            dir="${f%.html}"
+            mkdir -p "$dir"
+            mv "$f" "$dir/index.html"
+          done
+
+          # Copy 404.html so GitHub Pages serves the SPA shell for unknown paths
           [ -f ./dist/404.html ] && cp ./dist/404.html "$ARTIFACT_DIR/404.html"
-          # Prevent Jekyll processing (ensures all files are served as-is)
+
+          # Prevent Jekyll processing (ensures _-prefixed files are served)
           touch "$ARTIFACT_DIR/.nojekyll"
 
       - name: Upload artifact
