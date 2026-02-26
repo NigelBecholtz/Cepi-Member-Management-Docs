@@ -50,6 +50,14 @@ jobs:
             mv "$f" "$dir/index.html"
           done
 
+          # Overwrite root index.html with a reliable redirect to the intro page.
+          # Zudoku's redirect prerender can produce incorrect paths with basePath,
+          # so we generate it ourselves to guarantee correctness.
+          REPO="/${{ github.event.repository.name }}"
+          cat > "$ARTIFACT_DIR/index.html" <<REDIRECT
+          <!doctype html><meta http-equiv="refresh" content="0;url=${REPO}/documentation/introduction"><script>window.location.href='${REPO}/documentation/introduction';</script>
+          REDIRECT
+
           # Copy 404.html so GitHub Pages serves the SPA shell for unknown paths
           [ -f ./dist/404.html ] && cp ./dist/404.html "$ARTIFACT_DIR/404.html"
 
