@@ -40,26 +40,15 @@ jobs:
         run: |
           ARTIFACT_DIR="./dist/${{ github.event.repository.name }}"
 
-          # Convert route.html files to route/index.html so GitHub Pages
-          # serves them at clean URLs (e.g. /documentation/introduction).
-          # Skip the root index.html, 404.html, and error pages.
-          find "$ARTIFACT_DIR" -name '*.html' -not -name 'index.html' \
-            -not -name '404.html' -not -name '400.html' -not -name '500.html' | while read f; do
-            dir="${f%.html}"
-            mkdir -p "$dir"
-            mv "$f" "$dir/index.html"
-          done
-
           # Overwrite root index.html with a reliable redirect to the intro page.
-          # Zudoku's redirect prerender can produce incorrect paths with basePath,
-          # so we generate it ourselves to guarantee correctness.
           REPO="/${{ github.event.repository.name }}"
           cat > "$ARTIFACT_DIR/index.html" <<REDIRECT
           <!doctype html><meta http-equiv="refresh" content="0;url=${REPO}/documentation/introduction"><script>window.location.href='${REPO}/documentation/introduction';</script>
           REDIRECT
 
-          # Copy 404.html so GitHub Pages serves the SPA shell for unknown paths
-          [ -f ./dist/404.html ] && cp ./dist/404.html "$ARTIFACT_DIR/404.html"
+          # GitHub Pages serves 404.html as the SPA shell for any unmatched path,
+          # which lets Zudoku's client-side router handle all routes without trailing-slash issues.
+          # Zudoku outputs 404.html into the basePath subdir, so it is already in place.
 
           # Prevent Jekyll processing (ensures _-prefixed files are served)
           touch "$ARTIFACT_DIR/.nojekyll"
